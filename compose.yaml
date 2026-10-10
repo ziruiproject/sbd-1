@@ -1,0 +1,66 @@
+services:
+  # ========================================================
+  # 1. DATABASE DENGAN INDEKS (Port 5433)
+  # ========================================================
+  db_dengan_index:
+    image: postgres:17-alpine
+    container_name: pg_dengan_index
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: rahasia123
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_dengan_index:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: always
+
+  # ========================================================
+  # 2. DATABASE TANPA INDEKS (Port 5434)
+  # ========================================================
+  db_tanpa_index:
+    image: postgres:17-alpine
+    container_name: pg_tanpa_index
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: rahasia123
+      POSTGRES_DB: postgres
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata_tanpa_index:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+    restart: always
+
+  # ========================================================
+  # 3. INITIALIZER
+  # ========================================================
+  initializer:
+    image: postgres:17-alpine
+    container_name: sbd1_initializer
+    environment:
+      PGPASSWORD: rahasia123
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    depends_on:
+      db_dengan_index:
+        condition: service_healthy
+      db_tanpa_index:
+        condition: service_healthy
+    entrypoint: ["/bin/bash", "/workspace/init.sh"]
+
+volumes:
+  pgdata_dengan_index:
+  pgdata_tanpa_index:

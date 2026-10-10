@@ -1,0 +1,26 @@
+pgbench (17.11)
+progress: 10.0 s, 68.6 tps, lat 283.659 ms stddev 69.633, 0 failed
+progress: 20.0 s, 71.5 tps, lat 280.141 ms stddev 50.643, 0 failed
+progress: 30.0 s, 70.4 tps, lat 283.549 ms stddev 51.760, 0 failed
+progress: 40.0 s, 71.2 tps, lat 281.765 ms stddev 49.780, 0 failed
+progress: 50.0 s, 71.0 tps, lat 281.843 ms stddev 49.871, 0 failed
+progress: 60.0 s, 70.3 tps, lat 284.850 ms stddev 51.681, 0 failed
+progress: 70.0 s, 70.2 tps, lat 283.432 ms stddev 47.831, 0 failed
+progress: 80.0 s, 61.6 tps, lat 323.719 ms stddev 90.995, 0 failed
+progress: 90.0 s, 67.4 tps, lat 298.804 ms stddev 60.410, 0 failed
+progress: 100.0 s, 66.4 tps, lat 301.320 ms stddev 65.875, 0 failed
+progress: 110.0 s, 69.4 tps, lat 288.412 ms stddev 44.758, 0 failed
+progress: 120.0 s, 69.2 tps, lat 288.727 ms stddev 50.420, 0 failed
+transaction type: /w/bench.sql
+scaling factor: 1
+query mode: simple
+number of clients: 20
+number of threads: 4
+maximum number of tries: 1
+duration: 120 s
+number of transactions actually processed: 8292
+number of failed transactions: 0 (0.000%)
+latency average = 289.446 ms
+latency stddev = 59.024 ms
+initial connection time = 95.325 ms
+tps = 69.055803 (without initial connection time)
